@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overview Inventory Transaction History</title>
+    <!-- Use Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Ionicons for beautiful SVGs without external heavy libraries -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-title">
+                <ion-icon name="layers-outline"></ion-icon>
+                <h1>Overview Inventory Transaction History</h1>
+            </div>
+            <div class="user-profile">
+                <div class="avatar">U</div>
+                <span>Username</span>
+            </div>
+        </header>
+
+        <!-- Main Content Panel -->
+        <main class="main-panel">
+            
+            <!-- Filters Section (Glassmorphism look) -->
+            <section class="filters-section">
+                <div class="filters-grid">
+                    <!-- Row 1 -->
+                    <div class="filter-group">
+                        <label for="partNo">Part No/Desc</label>
+                        <div class="input-with-icon">
+                            <ion-icon name="barcode-outline"></ion-icon>
+                            <input type="text" id="partNo" placeholder="Enter Part No or Desc">
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <label for="userName">User Name</label>
+                        <div class="input-with-icon">
+                            <ion-icon name="person-outline"></ion-icon>
+                            <input type="text" id="userName" placeholder="Search by User">
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <label for="site">Site / Location</label>
+                        <div class="input-with-icon">
+                            <ion-icon name="location-outline"></ion-icon>
+                            <input type="text" id="site" placeholder="e.g. LOC001">
+                        </div>
+                    </div>
+
+                    <div class="actions-group">
+                        <button class="btn btn-primary" id="searchBtn">
+                            <ion-icon name="search-outline"></ion-icon>
+                            Search
+                        </button>
+                        <button class="btn btn-secondary" id="clearBtn">
+                            <ion-icon name="brush-outline"></ion-icon>
+                            Clear
+                        </button>
+                    </div>
+                </div>
+
+                <div class="filters-grid filters-secondary">
+                    <!-- Row 2 -->
+                    <div class="filter-group compact">
+                        <label for="fromDate">From</label>
+                        <input type="date" id="fromDate">
+                    </div>
+                    <div class="filter-group compact">
+                        <label for="toDate">To</label>
+                        <input type="date" id="toDate">
+                    </div>
+                    <div class="filter-group compact">
+                        <label for="transactionType">Transaction Type</label>
+                        <input type="text" id="transactionType" placeholder="e.g. WMS Put Away">
+                    </div>
+                    <div class="filter-group compact">
+                        <label for="direction">Direction</label>
+                        <input type="text" id="direction" placeholder="Direction">
+                    </div>
+                    <div class="filter-group compact">
+                        <label for="batchNo">Batch No</label>
+                        <input type="text" id="batchNo" placeholder="Batch No">
+                    </div>
+                    <div class="filter-group compact">
+                        <label for="orderRef">Order Ref</label>
+                        <input type="text" id="orderRef" placeholder="Order Ref">
+                    </div>
+                    <div class="filter-group compact">
+                        <label for="wdrNo">W/D/R No</label>
+                        <input type="text" id="wdrNo" placeholder="W/D/R No">
+                    </div>
+                </div>
+
+                <div class="date-presets" aria-label="Quick date filters">
+                    <button class="preset-btn" type="button" data-range="today">Today</button>
+                    <button class="preset-btn" type="button" data-range="last7">Last 7 Days</button>
+                    <button class="preset-btn" type="button" data-range="month">This Month</button>
+                </div>
+            </section>
+
+            <div class="table-container">
+                <table class="data-table" id="warehouseTable">
+                    <thead>
+                        <tr>
+                            <th>Part No</th>
+                            <th>Description</th>
+                            <th>Barcode</th>
+                            <th>Location</th>
+                            <th>Transaction Type</th>
+                            <th>User</th>
+                            <th>Allocated Date and Time</th>
+                            <th>Contract</th>
+                            <th>Lot/Batch No</th>
+                            <th>Expiration Date</th>
+                            <th>Transferred Qty</th>
+                            <th>Available Qty</th>
+                            <th>Receipt Ref No</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Data populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Footer Toolbar -->
+            <footer class="panel-footer">
+                <div class="footer-stats">
+                    Showing <span id="recordCount">0</span> records
+                </div>
+                <button class="btn btn-export" id="exportBtn">
+                    <ion-icon name="document-text-outline"></ion-icon>
+                    Export to Excel
+                </button>
+            </footer>
+
+        </main>
+    </div>
+
+    <!-- Export Confirmation Toast (Hidden by default) -->
+    <div class="toast" id="toastMessage">
+        <ion-icon name="checkmark-circle"></ion-icon>
+        <span>Report successfully exported!</span>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
